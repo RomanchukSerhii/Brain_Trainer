@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Brain Trainer</string>
+    <string name="count_right_answers">%s /</string>
+    <string name="answers_count"> %s</string>
+    <string name="timer">00:%s</string>
+    <string name="expression">%s + %s</string>
+</resources>
