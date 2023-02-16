@@ -29,12 +29,16 @@ class MainViewModel : ViewModel() {
     val isTimerFinish: LiveData<Boolean> = _isTimerFinish
 
     fun getNewExpression(userAnswer: Int) {
+        countAnswer++
+        if (userAnswer == expression.getRightAnswer()) countRightAnswer++
+        getNewExpression()
+    }
+
+    fun getNewExpression() {
         _countAnswerLiveData.value = countAnswer
         _countRightAnswerLiveData.value = countRightAnswer
         _expressionLiveData.value = expression.getExpression()
         _rightAnswers.value = expression.getAnswerVariants()
-        countAnswer++
-        if (userAnswer == expression.getRightAnswer()) countRightAnswer++
     }
 
     fun startTimer() {

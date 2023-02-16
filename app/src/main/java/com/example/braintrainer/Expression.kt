@@ -1,16 +1,16 @@
 package com.example.braintrainer
 
 class Expression {
-    private val answerVariants = mutableListOf<Int>()
+    private val answerVariants = MutableList(4) { 0 }
     private var rightAnswer = 0
 
     fun getExpression(): String {
         val firstNumber = randomNumber()
         val secondNumber = randomNumber()
         rightAnswer = firstNumber + secondNumber
-        answerVariants.add(rightAnswer)
-        repeat(3) {
-            answerVariants.add(randomNumber(rightAnswer))
+        answerVariants[0] = rightAnswer
+        for (index in 1..3) {
+            answerVariants[index] = randomNumber(rightAnswer)
         }
         answerVariants.shuffle()
         return "$firstNumber + $secondNumber"
@@ -29,6 +29,6 @@ class Expression {
     }
 
     private fun randomNumber(answer: Int): Int {
-        return (rightAnswer - 10..rightAnswer + 10).random()
+        return ((rightAnswer - 10)..(rightAnswer + 10)).random()
     }
 }
