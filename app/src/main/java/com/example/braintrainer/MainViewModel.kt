@@ -28,9 +28,17 @@ class MainViewModel : ViewModel() {
     private val _isTimerFinish = MutableLiveData(false)
     val isTimerFinish: LiveData<Boolean> = _isTimerFinish
 
+    private val _isRightAnswer = MutableLiveData<Boolean>()
+    val isRightAnswer: LiveData<Boolean> = _isRightAnswer
+
     fun getNewExpression(userAnswer: Int) {
         countAnswer++
-        if (userAnswer == expression.getRightAnswer()) countRightAnswer++
+        if (userAnswer == expression.getRightAnswer()) {
+            _isRightAnswer.value = true
+            countRightAnswer++
+        } else {
+            _isRightAnswer.value = false
+        }
         getNewExpression()
     }
 

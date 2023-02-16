@@ -18,7 +18,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         observeViewModels()
+        setOnButtonListeners()
+        viewModel.getNewExpression()
+        viewModel.startTimer()
+    }
 
+    private fun setOnButtonListeners() {
         binding.apply {
             var answer: Int
 
@@ -42,8 +47,6 @@ class MainActivity : AppCompatActivity() {
                 viewModel.getNewExpression(answer)
             }
         }
-        viewModel.getNewExpression()
-        viewModel.startTimer()
     }
 
     private fun observeViewModels() {
@@ -92,6 +95,11 @@ class MainActivity : AppCompatActivity() {
                             .getIntent(this@MainActivity, countAnswer, countRightAnswer)
                         startActivity(intent)
                     }
+                }
+
+                isRightAnswer.observe(this@MainActivity) { isRightAnswer ->
+                    val message = if (isRightAnswer) "Верно!" else "Не верно!"
+                    Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
