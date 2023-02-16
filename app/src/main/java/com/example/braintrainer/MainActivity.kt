@@ -14,20 +14,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val timer = object : CountDownTimer(6000, 1000){
-            override fun onTick(millisUntilFinished: Long) {
-                var seconds = (millisUntilFinished / 1000).toInt()
-                seconds++
-                binding.textViewTimer.text = seconds.toString()
-            }
-            override fun onFinish() {
-                Toast.makeText(
-                    this@MainActivity, "Timer is end", Toast.LENGTH_SHORT
-                ).show()
-                binding.textViewTimer.text = "0"
-            }
-        }
-        timer.start()
+
 
     }
 }

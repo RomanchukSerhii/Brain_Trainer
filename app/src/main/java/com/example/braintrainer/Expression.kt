@@ -10,7 +10,7 @@ class Expression {
         rightAnswer = firstNumber + secondNumber
         answerVariants.add(rightAnswer)
         repeat(3) {
-            answerVariants.add(randomNumber())
+            answerVariants.add(randomNumber(rightAnswer))
         }
         answerVariants.shuffle()
         return "$firstNumber + $secondNumber"
@@ -26,5 +26,9 @@ class Expression {
 
     private fun randomNumber(): Int {
         return (1..40).random()
+    }
+
+    private fun randomNumber(answer: Int): Int {
+        return (rightAnswer - 10..rightAnswer + 10).random()
     }
 }
