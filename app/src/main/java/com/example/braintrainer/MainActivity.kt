@@ -1,5 +1,7 @@
 package com.example.braintrainer
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -43,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             textViewFourthVariant.setOnClickListener {
-                answer = textViewThirdVariant.text.toString().toInt()
+                answer = textViewFourthVariant.text.toString().toInt()
                 viewModel.getNewExpression(answer)
             }
         }
@@ -53,11 +55,9 @@ class MainActivity : AppCompatActivity() {
         viewModel.apply {
             binding.apply {
                 var countAnswer = 0
-                var countRightAnswer = 0
                 countAnswerLiveData.observe(this@MainActivity) {
                     textViewAnswersCount.text =
                         resources.getString(R.string.answers_count, it)
-                    countRightAnswer = it
                 }
 
                 countRightAnswerLiveData.observe(this@MainActivity) {
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
                 isTimerFinish.observe(this@MainActivity) { isFinish ->
                     if (isFinish) {
                         val intent = ResultActivity
-                            .getIntent(this@MainActivity, countAnswer, countRightAnswer)
+                            .getIntent(this@MainActivity, countAnswer)
                         startActivity(intent)
                     }
                 }
@@ -102,6 +102,12 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+    companion object {
+        fun getIntent(context: Context): Intent {
+            return Intent(context, MainActivity::class.java)
         }
     }
 }

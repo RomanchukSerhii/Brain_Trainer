@@ -9,9 +9,7 @@ class Expression {
         val secondNumber = randomNumber()
         rightAnswer = firstNumber + secondNumber
         answerVariants[0] = rightAnswer
-        for (index in 1..3) {
-            answerVariants[index] = randomNumber(rightAnswer)
-        }
+        addRandomVariants()
         answerVariants.shuffle()
         return "$firstNumber + $secondNumber"
     }
@@ -22,6 +20,16 @@ class Expression {
 
     fun getAnswerVariants(): List<Int> {
         return answerVariants
+    }
+
+    private fun addRandomVariants() {
+        for (index in 1..3) {
+            var randomAnswer = randomNumber(rightAnswer)
+            while (answerVariants.contains(randomAnswer) && randomAnswer < 0) {
+                randomAnswer = randomNumber(rightAnswer)
+            }
+            answerVariants[index] = randomAnswer
+        }
     }
 
     private fun randomNumber(): Int {

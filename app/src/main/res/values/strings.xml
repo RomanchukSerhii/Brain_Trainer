@@ -3,4 +3,7 @@
     <string name="count_right_answers">%d /</string>
     <string name="answers_count"> %d</string>
     <string name="timer">00:%s</string>
+    <string name="result">Ваш результат: %d</string>
+    <string name="max_result">Максимальный результат: %d</string>
+    <string name="start_again">Начать заново</string>
 </resources>
